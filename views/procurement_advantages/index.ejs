@@ -1,0 +1,45 @@
+<div class="row">
+    <h2 class="page-title">
+        <%= title %>
+    </h2>
+
+    <div class="btn-wrapper">
+        <a href="/admin/procurement_advantages/create" class="btn-create">
+            Create New <%= title %>
+        </a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Lang</th>
+                <th>Title</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% advantages.forEach((advantage, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= advantage.lang %></td>
+                    <td><%= advantage.title %></td>
+                    <td>
+                        <button class="btn btn-edit"
+                            onclick="location.href='/admin/procurement_advantages/edit/<%= advantage.id %>'">
+                            Details
+                        </button>
+
+                        <form action="/admin/procurement_advantages/remove/<%= advantage.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-remove"
+                                onclick="return confirm('Are you sure you want to delete this item?')">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/homepage_products/edit/<%= product.id %>" class="form-container">
+    <input type="text" name="title" class="form-input" value="<%= product.title %>" placeholder="Enter Title">
+    <input type="text" name="route" class="form-input" value="<%= product.route %>" placeholder="Enter Route">
+
+    <div class="input-with-button">
+      <input type="text" name="img_url" id="selectedMediaInput" class="form-input" value="<%= product.img_url %>" placeholder="Enter Image URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput">Choose</button>
+    </div>
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Select Media</h2>
+      <div class="image-grid" id="imageGrid">
+        <div id="imagesContainer"><h3>Images</h3></div>
+        <div id="videosContainer"><h3>Videos</h3></div>
+      </div>
+    </div>
+  </div>
+</div>

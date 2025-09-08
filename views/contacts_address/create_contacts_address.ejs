@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/contacts_address/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Language" value="<%= item ? item.lang : '' %>">
+    <input type="text" name="title" class="form-input" placeholder="Title" value="<%= item ? item.title : '' %>">
+    <input type="text" name="address" class="form-input" placeholder="Address" value="<%= item ? item.address : '' %>">
+    <input type="text" name="phone_title" class="form-input" placeholder="Phone Title" value="<%= item ? item.phone_title : '' %>">
+    <input type="text" name="phone_number" class="form-input" placeholder="Phone Number" value="<%= item ? item.phone_number : '' %>">
+    <input type="text" name="email_title" class="form-input" placeholder="Email Title" value="<%= item ? item.email_title : '' %>">
+    <input type="email" name="email_address" class="form-input" placeholder="Email Address" value="<%= item ? item.email_address : '' %>">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message"><%= error %></p>
+  <% } %>
+</div>

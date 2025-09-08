@@ -1,0 +1,28 @@
+<div class="main">
+    <h2 class="api-text">API List Endpoints</h2>
+
+    <input type="text" id="searchInput" placeholder="Search API endpoint..."
+        style="margin-bottom: 1rem; padding: 0.5rem; width: 100%; max-width: 400px;">
+
+    <div class="list-endpoints" id="apiList">
+        <% api_list_endpoints.forEach(endpoint=> { %>
+            <a href="<%= endpoint %>" target="_blank">
+                <span>GET</span>   <%= endpoint %>
+            </a>
+            <% }); %>
+    </div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const apiList = document.getElementById('apiList');
+    const items = Array.from(apiList.getElementsByTagName('a'));
+
+    searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(query) ? '' : 'none';
+        });
+    });
+</script>

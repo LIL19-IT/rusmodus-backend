@@ -1,0 +1,24 @@
+<div class="page-wrapper">
+<h2 class="title">
+    <%= title %>
+  </h2>
+
+<form method="post" action="/admin/homepage_feedback/edit/<%= feedback.id %>" class="form-container">
+    <input type="text" name="title" value="<%= feedback.title %>" class="form-input">
+    <textarea name="description" rows="3" class="form-input"><%= feedback.description %></textarea>
+    <input type="text" name="checkbox_text" value="<%= feedback.checkbox_text %>" class="form-input">
+    <input type="text" name="btn_text" value="<%= feedback.btn_text %>" class="form-input">
+    <input type="text" name="placeholder_name" value="<%= feedback.placeholder_name %>" class="form-input">
+    <input type="text" name="placeholder_phone" value="<%= feedback.placeholder_phone %>" class="form-input">
+    <input type="text" name="placeholder_email" value="<%= feedback.placeholder_email %>" class="form-input">
+    <input type="text" name="placeholder_question" value="<%= feedback.placeholder_question %>" class="form-input">
+
+    <button type="submit" class="form-button">Update</button>
+</form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

@@ -1,0 +1,68 @@
+<div class="page-wrapper">
+  <h2><%= title %></h2>
+
+  <form action="/admin/footers_info/create" method="POST">
+    <div class="form-group">
+      <label>Lang</label>
+      <input type="text" name="lang" value="<%= footer.lang || '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" value="<%= footer.title || '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label>Tel</label>
+      <input type="text" name="tel" value="<%= footer.tel || '' %>">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" name="email" value="<%= footer.email || '' %>">
+    </div>
+
+    <h3>Social Links</h3>
+    <table id="socialLinksTable" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Image URL</th>
+          <th>URL</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div class="btn-group">
+      <button type="button" id="addSocialLinkBtn">+ Add Social Link</button>
+    </div>
+
+    <input type="submit" value="Create Footer Info" class="create">
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addSocialLinkBtn");
+  const tableBody = document.querySelector("#socialLinksTable tbody");
+
+  function getNextIndex() {
+    return tableBody.querySelectorAll("tr").length;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="social_links[${index}][id]" value="">
+        <input type="text" name="social_links[${index}][img_url]" value="">
+      </td>
+      <td><input type="text" name="social_links[${index}][url_links]" value=""></td>
+      <td><button type="button" class="removeRowBtn">Remove</button></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+</script>

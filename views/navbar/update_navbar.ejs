@@ -1,0 +1,18 @@
+<div class="page-wrapper">
+<h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/navbar/edit/<%= navbar.id %>" class="form-container">
+    <input type="text" name="label" id="label" class="form-input" value="<%= navbar.label %>" placeholder="Enter Label">
+    <input type="text" name="route" id="route" class="form-input" value="<%= navbar.route %>" placeholder="Enter Route">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

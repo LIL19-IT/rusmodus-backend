@@ -1,0 +1,54 @@
+<header>
+  <nav>
+    <p class="welcome-text">Welcome to <a href="/endpoints" style="text-decoration: none; color: inherit;" class="brand-link"><span>RUSMODUS</span></a> Site Admin Panel</p>
+
+    <div class="nav-links">
+      
+
+      <% if (user) { %>
+        <a href="/admin">Admin</a>
+        <a href="/endpoints">API'S</a>
+        <a href="/auth/logout">Logout</a>
+      <% } else { %>
+        <a href="/auth/login">Login</a>
+      <% } %>
+
+      <input type="checkbox" id="theme-toggle" hidden />
+      <label for="theme-toggle" class="theme-toggle-btn" title="Toggle Theme">
+        <i id="light-icon"  class="bi bi-brightness-high" style="display: inline-block;"></i>
+        <i id="dark-icon" class="bi bi-moon" style="display: none;"></i>
+      </label>
+    </div>
+  </nav>
+</header>
+
+
+<script>
+  (function () {
+    const toggle = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('light-icon');
+    const darkIcon = document.getElementById('dark-icon');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggle.checked = true;
+      lightIcon.style.display = 'none';
+      darkIcon.style.display = 'inline-block';
+    }
+
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        lightIcon.style.display = 'none';
+        darkIcon.style.display = 'inline-block';
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        lightIcon.style.display = 'inline-block';
+        darkIcon.style.display = 'none';
+      }
+    });
+  })();
+</script>

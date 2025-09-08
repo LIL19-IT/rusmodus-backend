@@ -1,0 +1,41 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/footers_credit/edit/<%= credit.id %>" class="form-container">
+
+
+    <input 
+      type="text" 
+      name="privacy_policy" 
+      value="<%= credit.privacy_policy %>" 
+      class="form-input" 
+      placeholder="Enter Privacy Policy text"
+    >
+
+    <input 
+      type="text" 
+      name="legal_info" 
+      value="<%= credit.legal_info %>" 
+      class="form-input" 
+      placeholder="Enter Legal Info text"
+    >
+
+    <input 
+      type="text" 
+      name="info" 
+      value="<%= credit.info %>" 
+      class="form-input" 
+      placeholder="Enter additional Info"
+    >
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+  <% } %>
+</div>

@@ -1,0 +1,48 @@
+<div class="row">
+    <h2 class="page-title">
+        <%= title %>
+    </h2>
+
+    <div class="btn-wrapper">
+        <a href="/admin/footers_links/create" class="btn-create">Create New <%= title %></a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Lang</th>
+                <th>Title</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            <% footersLinks.forEach((footer, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= footer.lang %>
+                    </td>
+                    <td>
+                        <%= footer.title %>
+                    </td>
+                    <td>
+                        <button class="btn btn-edit"
+                            onclick="location.href='/admin/footers_links/edit/<%= footer.id %>'">Details</button>
+
+                        <form action="/admin/footers_links/remove/<%= footer.id %>" method="POST"
+                            style="display:inline;">
+                            <button type="submit" class="btn btn-remove"
+                                onclick="return confirm('Are you sure?')">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+
+    </table>
+</div>

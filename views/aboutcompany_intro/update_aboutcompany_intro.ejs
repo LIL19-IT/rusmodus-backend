@@ -1,0 +1,44 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/aboutcompany_intro/edit/<%= intro.id %>" class="form-container">
+    <div class="input-with-button">
+      <input type="text" name="img_url" id="selectedMediaInput" value="<%= intro.img_url %>" class="form-input"
+        placeholder="Enter image URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput">Choose</button>
+    </div>
+    <input type="text" name="title" value="<%= intro.title %>" class="form-input" placeholder="Enter title">
+    <input type="text" name="description" value="<%= intro.description %>" class="form-input"
+      placeholder="Enter description">
+    <input type="text" name="sub_title" value="<%= intro.sub_title %>" class="form-input" placeholder="Enter sub title">
+    <input type="text" name="route" value="<%= intro.route %>" class="form-input" placeholder="Enter route">
+    <input type="text" name="sub_title1" value="<%= intro.sub_title1 %>" class="form-input"
+      placeholder="Enter second sub title">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>
+
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Select Media</h2>
+    <div class="image-grid" id="imageGrid">
+      <div id="imagesContainer">
+        <h3>Images</h3>
+      </div>
+      <div id="videosContainer">
+        <h3>Videos</h3>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,25 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+
+  <form method="post" action="/admin/positions/create" class="form-container">
+  <select name="vacancyId" class="form-input" required>
+  <option value="">Select Vacancy</option>
+  <% vacancies.forEach(vacancy => { %>
+    <option value="<%= vacancy.id %>"><%= vacancy.category %></option>
+  <% }) %>
+</select>
+
+
+    <input type="text" name="title" class="form-input" placeholder="Enter Position Title" required>
+    <input type="text" name="location" class="form-input" placeholder="Enter Location" required>
+    <input type="text" name="description" class="form-input" placeholder="Enter Description" required>
+    <input type="text" name="url_text" class="form-input" placeholder="Enter Button Text" required>
+    <input type="text" name="url_link" class="form-input" placeholder="Enter URL Link" required>
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+</div>

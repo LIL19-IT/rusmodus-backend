@@ -1,0 +1,32 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/pets_sortOption/create" class="form-container">
+    <input 
+      type="text" 
+      name="name" 
+      class="form-input" 
+      placeholder="Enter sort option name" 
+      value="<%= sortOption?.name || '' %>" 
+      required
+    >
+
+    <input 
+      type="text" 
+      name="lang" 
+      class="form-input" 
+      placeholder="Enter language code (e.g., en, fr)" 
+      value="<%= sortOption?.lang || '' %>" 
+      required
+    >
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+  <% } %>
+
+</div>
+

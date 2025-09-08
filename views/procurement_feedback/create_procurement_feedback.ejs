@@ -1,0 +1,27 @@
+<div class="page-wrapper">
+
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/procurement_feedback/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Enter language code (e.g., en, fr)">
+    <input type="text" name="title" class="form-input" placeholder="Enter title">
+    <input type="text" name="description" class="form-input" placeholder="Enter description">
+    <input type="text" name="checkbox_text" class="form-input" placeholder="Enter checkbox text">
+    <input type="text" name="btn_text" class="form-input" placeholder="Enter button text">
+    <input type="text" name="placeholder_name" class="form-input" placeholder="Enter placeholder for name">
+    <input type="text" name="placeholder_phone" class="form-input" placeholder="Enter placeholder for phone">
+    <input type="text" name="placeholder_email" class="form-input" placeholder="Enter placeholder for email">
+    <input type="text" name="placeholder_question" class="form-input" placeholder="Enter placeholder for question">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+
+</div>

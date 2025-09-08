@@ -1,0 +1,31 @@
+<div class="page-wrapper">
+    <h2 class="title">
+        <%= title %>
+    </h2>
+
+    <% if (error) { %>
+        <p style="color:red;">
+            <%= error %>
+        </p>
+        <% } %>
+
+            <form method="post" action="/admin/days/create" class="form-container">
+
+                <select name="contactHoursId" class="form-input" required>
+                    <option value="">Select Contact Hours</option>
+                    <% contactHoursList.forEach(ch=> { %>
+                        <option value="<%= ch.id %>" <%=ch.id==contactHoursId ? 'selected' : '' %>>
+                            <%= ch.title %>
+                        </option>
+                        <% }) %>
+                </select>
+
+
+                <input type="text" name="day" class="form-input" placeholder="Enter Day"
+                    value="<%= dayItem.day || '' %>" required>
+                <input type="text" name="time" class="form-input" placeholder="Enter Time"
+                    value="<%= dayItem.time || '' %>" required>
+
+                <button type="submit" class="form-button">Create</button>
+            </form>
+</div>

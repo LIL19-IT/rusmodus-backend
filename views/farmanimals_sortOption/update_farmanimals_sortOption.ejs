@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/farmanimals_sortOption/edit/<%= sortOption.id %>" class="form-container">
+    <input type="text" name="name" class="form-input" placeholder="Sort Option Name" value="<%= sortOption.name %>"
+      required>
+
+    <input type="text" name="lang" class="form-input" placeholder="Language (e.g. en, ru)"
+      value="<%= sortOption.lang %>" required>
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

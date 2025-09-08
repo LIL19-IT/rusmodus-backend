@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+
+  <form method="post" action="/admin/advantages/edit/<%= advantage.id %>" class="form-container">
+    <select name="procurementAdvantageId" class="form-input" required>
+      <option value="">Select Procurement Advantage</option>
+      <% procurementAdvantages.forEach(pa => { %>
+        <option value="<%= pa.id %>" <%= pa.id === advantage.procurementAdvantageId ? 'selected' : '' %>><%= pa.title %></option>
+      <% }) %>
+    </select>
+
+    <input type="text" name="number" class="form-input" placeholder="Enter Number" value="<%= advantage.number %>" required>
+    <input type="text" name="description" class="form-input" placeholder="Enter Description" value="<%= advantage.description %>" required>
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+</div>

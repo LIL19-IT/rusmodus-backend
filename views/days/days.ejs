@@ -1,0 +1,48 @@
+<div class="row">
+    <h2 class="page-title">
+        <%= title %>
+    </h2>
+
+    <div class="btn-wrapper">
+        <a href="/contacts_hours/<%= contactHoursId %>/days/create" class="btn-create">
+            Create New Day
+        </a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% days.forEach((dayItem, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= dayItem.day %>
+                    </td>
+                    <td>
+                        <%= dayItem.time %>
+                    </td>
+                    <td>
+                        <button class="btn btn-edit"
+                            onclick="location.href='/contacts_hours/<%= contactHoursId %>/days/edit/<%= dayItem.id %>'">Edit</button>
+                        <form action="/contacts_hours/<%= contactHoursId %>/days/remove/<%= dayItem.id %>" method="POST"
+                            style="display:inline;">
+                            <button type="" onclick="return confirm('Are you sure you want to delete this item?')"
+                                class="btn btn-remove">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>

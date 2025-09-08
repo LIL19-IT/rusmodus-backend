@@ -1,0 +1,97 @@
+<div class="rows">
+  <h2 class="page-title">Update Contact Hours</h2>
+
+  <!-- Contact Hours update -->
+  <form action="/admin/contacts_hours/update/<%= id %>" method="post">
+    <div class="actions">
+      <input type="submit" value="Save">
+      <a href="/admin/contacts_hours" class="back-btn">Back</a>
+    </div>
+
+    <div class="form-group">
+      <label>Lang:</label>
+      <input type="text" name="lang" value="<%= contactHour.lang %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= contactHour.title %>" />
+    </div>
+  </form>
+
+  <!-- Days update -->
+  <form action="/admin/contacts_hours/update-days/<%= id %>" method="post">
+    <h3>Days</h3>
+    <table id="daysTable" class="table" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (contactHour.days || []).forEach((day, index) => { %>
+          <tr>
+            <td>
+              <input type="hidden" name="days[<%= index %>][id]" value="<%= day.id %>">
+              <input type="text" name="days[<%= index %>][day]" value="<%= day.day %>">
+            </td>
+            <td>
+              <input type="text" name="days[<%= index %>][time]" value="<%= day.time %>">
+            </td>
+            <td><button type="button" class="removeRowBtn">Remove</button></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="btn-group">
+      <button type="button" id="addDayBtn">+ Add Day</button>
+      <button type="submit">Save Days</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addDayBtn");
+  const tableBody = document.querySelector("#daysTable tbody");
+
+  function getNextIndex() {
+    const rows = tableBody.querySelectorAll("tr");
+    let maxIndex = -1;
+    rows.forEach(tr => {
+      const hiddenInput = tr.querySelector("input[type='hidden']");
+      if (hiddenInput) {
+        const name = hiddenInput.name;
+        const match = name.match(/\[(\d+)\]/);
+        if (match) {
+          const idx = parseInt(match[1]);
+          if (idx > maxIndex) maxIndex = idx;
+        }
+      }
+    });
+    return maxIndex + 1;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="days[${index}][id]" value="">
+        <input type="text" name="days[${index}][day]" value="">
+      </td>
+      <td>
+        <input type="text" name="days[${index}][time]" value="">
+      </td>
+      <td><button type="button" class="removeRowBtn">Remove</button></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+
+  document.querySelectorAll(".removeRowBtn").forEach(btn => {
+    btn.addEventListener("click", e => e.target.closest("tr").remove());
+  });
+</script>

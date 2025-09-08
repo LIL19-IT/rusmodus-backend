@@ -1,0 +1,23 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/contacts_feedback/edit/<%= item.id %>" class="form-container">
+    <input type="text" name="sub_title" value="<%= item.sub_title %>" class="form-input" placeholder="Enter subtitle">
+    <input type="text" name="sub_title1" value="<%= item.sub_title1 %>" class="form-input" placeholder="Enter second subtitle">
+    <input type="text" name="route" value="<%= item.route %>" class="form-input" placeholder="Enter route">
+    <input type="text" name="title" value="<%= item.title %>" class="form-input" placeholder="Enter title">
+    <input type="text" name="description" value="<%= item.description %>" class="form-input" placeholder="Enter description">
+    <input type="text" name="checkbox_text" value="<%= item.checkbox_text %>" class="form-input" placeholder="Enter checkbox text">
+    <input type="text" name="btn_text" value="<%= item.btn_text %>" class="form-input" placeholder="Enter button text">
+    <input type="text" name="placeholder_name" value="<%= item.placeholder_name %>" class="form-input" placeholder="Enter placeholder for name">
+    <input type="text" name="placeholder_phone" value="<%= item.placeholder_phone %>" class="form-input" placeholder="Enter placeholder for phone">
+    <input type="text" name="placeholder_email" value="<%= item.placeholder_email %>" class="form-input" placeholder="Enter placeholder for email">
+    <input type="text" name="placeholder_question" value="<%= item.placeholder_question %>" class="form-input" placeholder="Enter placeholder for question">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+</div>

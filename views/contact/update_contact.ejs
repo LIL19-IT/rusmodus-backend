@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+<h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/contact/edit/<%= contact.id %>" class="form-container">
+    <input type="text" name="phone" id="phone" class="form-input" value="<%= contact.phone %>">
+    <input type="text" name="callRequestLabel" id="callRequestLabel" class="form-input"
+      value="<%= contact.callRequestLabel %>">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+    <h2 class="title">
+        <%= title %>
+    </h2>
+
+    <form method="post" action="/admin/homepage_products_heading/create" class="form-container">
+        <input type="text" name="lang" class="form-input" placeholder="e.g., en, fr">
+        <input type="text" name="title" class="form-input" placeholder="Enter title">
+        <textarea name="description" class="form-input" rows="4" placeholder="Enter description"></textarea>
+
+        <button type="submit" class="form-button">Create</button>
+    </form>
+
+    <% if (error) { %>
+        <p class="error-messages">
+            <%= error %>
+        </p>
+        <% } %>
+</div>

@@ -1,0 +1,99 @@
+<div class="rows">
+  <h2 class="page-title">Update Footer Link</h2>
+
+  <form action="/admin/footers_links/update/<%= id %>" method="post">
+    <div class="actions">
+      <input type="submit" value="Save">
+      <a href="/admin/footers_links" class="back-btn">Back</a>
+    </div>
+
+    <div class="form-group">
+      <label>Lang:</label>
+      <input type="text" name="lang" value="<%= footer.lang %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= footer.title %>" />
+    </div>
+  </form>
+
+  <form action="/admin/footers_links/update-links/<%= id %>" method="post">
+
+    <h3>Links</h3>
+    <table id="linksTable" class="table" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Route</th>
+          <th>Lang</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (footer.links || []).forEach((link, index) => { %>
+          <tr>
+            <td>
+              <input type="hidden" name="links[<%= index %>][id]" value="<%= link.id %>">
+              <input type="text" name="links[<%= index %>][title]" value="<%= link.title %>">
+            </td>
+            <td>
+              <input type="text" name="links[<%= index %>][route]" value="<%= link.route %>">
+            </td>
+            <td>
+              <input type="text" name="links[<%= index %>][lang]" value="<%= link.lang %>">
+            </td>
+            <td><button type="button" class="removeRowBtn">Remove</button></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="btn-group">
+      <button type="button" id="addLinkBtn">+ Add Link</button>
+      <button type="submit">Save Links</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addLinkBtn");
+  const tableBody = document.querySelector("#linksTable tbody");
+
+  function getNextIndex() {
+    const rows = tableBody.querySelectorAll("tr");
+    let maxIndex = -1;
+    rows.forEach(tr => {
+      const hiddenInput = tr.querySelector("input[type='hidden']");
+      if (hiddenInput) {
+        const name = hiddenInput.name;
+        const match = name.match(/\[(\d+)\]/);
+        if (match) {
+          const idx = parseInt(match[1]);
+          if (idx > maxIndex) maxIndex = idx;
+        }
+      }
+    });
+    return maxIndex + 1;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="links[${index}][id]" value="">
+        <input type="text" name="links[${index}][title]" value="">
+      </td>
+      <td><input type="text" name="links[${index}][route]" value=""></td>
+      <td><input type="text" name="links[${index}][lang]" value=""></td>
+      <td><button type="button" class="removeRowBtn">Remove</button></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+
+  document.querySelectorAll(".removeRowBtn").forEach(btn => {
+    btn.addEventListener("click", e => e.target.closest("tr").remove());
+  });
+</script>

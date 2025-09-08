@@ -1,0 +1,46 @@
+<div class="row">
+  <h2 class="page-title">
+    <%= title %>
+  </h2>
+
+  <div class="btn-wrapper">
+    <a href="/admin/farmanimals_show_product_btn_text/create" class="btn-create">Create New Product Btn text</a>
+  </div>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>N</th>
+        <th>Lang</th>
+        <th>Text</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% btn_texts.forEach((item, index)=> { %>
+        <tr>
+          <td>
+            <%= index + 1 %>
+          </td>
+          <td>
+            <%= item.lang %>
+          </td>
+          <td>
+            <%= item.text %>
+          </td>
+          <td>
+            <button class="btns btn-edit"
+              onclick="location.href='/admin/farmanimals_show_product_btn_text/edit/<%= item.id %>'">Edit</button>
+            <form action="/admin/farmanimals_show_product_btn_text/remove/<%= item.id %>" method="POST"
+              style="display:inline;">
+              <button type="submit" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-remove">
+                Remove
+              </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+</div>

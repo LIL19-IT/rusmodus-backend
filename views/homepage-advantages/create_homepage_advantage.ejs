@@ -1,0 +1,36 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/homepage-advantages/create" class="form-container">
+    <input type="text" name="lang" id="lang" class="form-input" placeholder="Enter language code"
+      value="<%= lang || '' %>">
+
+    <div class="input-with-button">
+      <input type="text" name="img_url" id="selectedMediaInput" class="form-input" placeholder="Enter image URL"
+        value="<%= img_url || '' %>">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput">Choose</button>
+    </div>
+
+    <input type="text" name="title" id="title" class="form-input" placeholder="Enter title"
+      value="<%= titleValue || '' %>">
+    <textarea name="description" id="description" class="form-input"
+      placeholder="Enter description"><%= description || '' %></textarea>
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Select Media</h2>
+      <div class="image-grid" id="imageGrid">
+        <div id="imagesContainer"><h3>Images</h3></div>
+        <div id="videosContainer"><h3>Videos</h3></div>
+      </div>
+    </div>
+  </div>
+</div>

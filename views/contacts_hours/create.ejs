@@ -1,0 +1,58 @@
+<div class="page-wrapper">
+  <h2><%= title %></h2>
+
+  <form action="/admin/contacts_hours/create" method="POST">
+    <div class="form-group">
+      <label>Lang</label>
+      <input type="text" name="lang" value="<%= contactHour?.lang || '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" value="<%= contactHour?.title || '' %>" required>
+    </div>
+
+    <h3>Days</h3>
+    <table id="daysTable" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div class="btn-group">
+      <button type="button" id="addDayBtn">+ Add Day</button>
+    </div>
+
+    <input type="submit" value="Create Contact Hours" class="create">
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addDayBtn");
+  const tableBody = document.querySelector("#daysTable tbody");
+
+  function getNextIndex() {
+    return tableBody.querySelectorAll("tr").length;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="days[${index}][id]" value="">
+        <input type="text" name="days[${index}][day]" value="">
+      </td>
+      <td><input type="text" name="days[${index}][time]" value=""></td>
+      <td><button type="button" class="removeRowBtn">Remove</button></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+</script>

@@ -1,0 +1,206 @@
+<div class="rows">
+  <h2 class="page-title">Update Aquaculture Content</h2>
+
+  <form action="/admin/aquaculture_content/update/<%=id%>" method="post">
+    <div class="actions">
+      <input type="submit" value="Save">
+      <a href="/admin/aquaculture_content" class="back-btn">
+        <i class="fa fa-arrow-left"></i> Back
+      </a>
+    </div>
+
+    <div class="form-group">
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= content.title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Sub Title:</label>
+      <input type="text" name="sub_title" value="<%= content.sub_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Sub Title 1:</label>
+      <input type="text" name="sub_title1" value="<%= content.sub_title1 %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Sub Title 2:</label>
+      <input type="text" name="sub_title2" value="<%= content.sub_title2 %>" />
+    </div>
+
+    <div class="image-input-group">
+      <div class="input-button">
+        <label>Thumbnail:</label>
+        <input type="image" id="thumbnailPreview" src="<%= content.thumbnail %>" class="form-input image-preview">
+        <input type="hidden" name="thumbnail" id="thumbnailInput" value="<%= content.thumbnail %>">
+        <button type="button" class="small-button openMediaModal" data-target="thumbnailInput">Choose</button>
+      </div>
+
+      <div class="input-button">
+        <label>Main Image:</label>
+        <input type="image" id="mainImagePreview" src="<%= content.img_url %>" class="form-input image-preview">
+        <input type="hidden" name="img_url" id="mainImageInput" value="<%= content.img_url %>">
+        <button type="button" class="small-button openMediaModal" data-target="mainImageInput">Choose</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea name="description"><%= content.description %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Type Title:</label>
+      <input type="text" name="type_title" value="<%= content.type_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Type Text:</label>
+      <textarea name="type_text"><%= content.type_text %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Size Title:</label>
+      <input type="text" name="size_title" value="<%= content.size_title || '' %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Size Text:</label>
+      <textarea name="size_text"><%= content.size_text || '' %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Components Title:</label>
+      <input type="text" name="components_title" value="<%= content.components_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Components Text:</label>
+      <textarea name="components_text"><%= content.components_text %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Vitamin Title:</label>
+      <input type="text" name="vitamin_title" value="<%= content.vitamin_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Vitamin Text:</label>
+      <textarea name="vitamin_text"><%= content.vitamin_text %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Shelf Life Title:</label>
+      <input type="text" name="shelf_life_title" value="<%= content.shelf_life_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Shelf Life Text:</label>
+      <textarea name="shelf_life_text"><%= content.shelf_life_text %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Storage Conditions Title:</label>
+      <input type="text" name="storage_conditions_title" value="<%= content.storage_conditions_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Storage Conditions Text:</label>
+      <textarea name="storage_conditions_text"><%= content.storage_conditions_text %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Characteristics Title:</label>
+      <input type="text" name="characteristics_title" value="<%= content.characteristics_title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Button Text:</label>
+      <input type="text" name="btn_text" value="<%= content.btn_text %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Aquaculture Name:</label>
+      <input type="text" name="aquaculture_name" value="<%= content.aquaculture_name %>" />
+    </div>
+  </form>
+
+  <form action="/admin/aquaculture_content/characteristics/<%= id %>" method="post">
+    <h2>Characteristics</h2>
+    <table id="characteristicsTable" class="table" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Percent</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (content.characteristics || []).forEach((c, index)=> { %>
+          <tr>
+            <td>
+              <input type="hidden" name="characteristics[<%= index %>][id]" value="<%= c.id %>">
+              <input type="text" name="characteristics[<%= index %>][title]" value="<%= c.title %>">
+            </td>
+            <td>
+              <input type="text" name="characteristics[<%= index %>][percent]" value="<%= c.percent %>">
+            </td>
+            <td>
+              <button type="button" class="removeRowBtn">Remove</button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <div class="btn-group"> 
+      <button type="button" id="addCharBtn"> <i class="fa fa-plus"></i> Add Characteristic</button> 
+      <button type="submit">Save Characteristics</button> 
+    </div>
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addCharBtn");
+  const tableBody = document.querySelector("#characteristicsTable tbody");
+
+  function getNextIndex() {
+    const rows = tableBody.querySelectorAll("tr");
+    let maxIndex = -1;
+    rows.forEach((tr) => {
+      const hiddenInput = tr.querySelector("input[type='hidden']");
+      if (hiddenInput) {
+        const name = hiddenInput.name;
+        const match = name.match(/\[(\d+)\]/);
+        if (match) {
+          const idx = parseInt(match[1]);
+          if (idx > maxIndex) maxIndex = idx;
+        }
+      }
+    });
+    return maxIndex + 1;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="characteristics[${index}][id]" value="">
+        <input type="text" name="characteristics[${index}][title]" value="">
+      </td>
+      <td>
+        <input type="text" name="characteristics[${index}][percent]" value="">
+      </td>
+      <td>
+        <button type="button" class="removeRowBtn">Remove</button>
+      </td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+
+  document.querySelectorAll(".removeRowBtn").forEach(btn => {
+    btn.addEventListener("click", e => e.target.closest("tr").remove());
+  });
+</script>

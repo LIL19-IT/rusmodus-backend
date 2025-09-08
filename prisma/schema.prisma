@@ -1,0 +1,730 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Language {
+  id        String   @id @default(uuid())
+  label     String
+  createdAt DateTime @default(now())
+}
+
+model Contact {
+  id               String   @id @default(uuid())
+  lang             String
+  phone            String
+  callRequestLabel String
+  createdAt DateTime @default(now())
+}
+
+model Navbar {
+  id        String   @id @default(uuid())
+  lang      String
+  label     String
+  route     String
+  createdAt DateTime @default(now())
+}
+
+model Header_logo {
+  id        String   @id @default(uuid())
+  src       String
+  createdAt DateTime @default(now())
+}
+
+model Homepage_intro {
+  id          String   @id @default(uuid())
+  video_src   String
+  lang        String
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model Homepage_products_heading {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Homepage_products {
+  id      String   @id @default(uuid())
+  title   String
+  route   String
+  img_url String
+  lang    String
+  createdAt DateTime @default(now())
+}
+
+model Homepage_advantages_heading {
+  id      String   @id @default(uuid())
+  title   String
+  img_url String
+  lang    String
+  createdAt DateTime @default(now())
+}
+
+model Homepage_advantages {
+  id          String   @id @default(uuid())
+  img_url     String
+  title       String
+  description String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Homepage_about {
+  id           String   @id @default(uuid())
+  title        String
+  sub_title    String
+  description1 String
+  description2 String
+  img1_url     String
+  img2_url     String
+  btn_text     String
+  route        String
+  lang         String
+  createdAt    DateTime @default(now())
+}
+
+model Homepage_news_heading {
+  id        String   @id @default(uuid())
+  title     String
+  link_news String
+  route     String
+  lang      String
+  createdAt DateTime @default(now())
+}
+
+model Homepage_news {
+  id         String         @id @default(uuid())
+  img_url    String
+  data       String
+  title      String
+  link_about String
+  lang       String
+  newsContents News_content[]
+  createdAt  DateTime @default(now())
+
+  @@map("homepage_news")
+}
+
+model Homepage_feedback {
+  id                   String   @id @default(uuid())
+  title                String
+  description          String
+  checkbox_text        String
+  btn_text             String
+  placeholder_name     String
+  placeholder_phone    String
+  placeholder_email    String
+  placeholder_question String
+  lang                 String
+  createdAt            DateTime @default(now())
+}
+
+model Footer_heading {
+  id    String   @id @default(uuid())
+  title String
+  lang  String
+  createdAt DateTime @default(now())
+}
+
+model Footer_link {
+  id    String   @id @default(uuid())
+  title String
+  lang  String
+  links Link[] @relation("FooterLinkToLinks")
+  createdAt DateTime @default(now())
+}
+
+model Link {
+  id       String      @id @default(uuid())
+  title    String
+  route    String
+  lang     String
+  footerId String
+  footer   Footer_link @relation("FooterLinkToLinks", fields: [footerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Footers_info {
+  id           String         @id @default(uuid())
+  lang         String
+  title        String
+  tel          String
+  email        String
+  social_links Social_links[] @relation("FooterInfoSocialLinks")
+  createdAt    DateTime @default(now())
+}
+
+model Social_links {
+  id        String       @id @default(uuid())
+  img_url   String
+  url_links String
+  footerId  String
+  footer    Footers_info @relation("FooterInfoSocialLinks", fields: [footerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Footers_schedule {
+  id            String          @id @default(uuid())
+  lang          String
+  title         String
+  schedule_list Schedule_list[] @relation("FooterToSchedule")
+  createdAt     DateTime @default(now())
+}
+
+model Schedule_list {
+  id       String           @id @default(uuid())
+  lang     String
+  days     String
+  hours    String
+  footerId String
+  footer   Footers_schedule @relation("FooterToSchedule", fields: [footerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Footer_credit {
+  id             String   @id @default(uuid())
+  lang           String
+  privacy_policy String
+  legal_info     String
+  info           String
+  createdAt      DateTime @default(now())
+}
+
+model Aquaculture_intro {
+  id         String   @id @default(uuid())
+  title      String
+  sub_title  String
+  route      String
+  sub_title1 String
+  video_src  String
+  lang       String
+  createdAt  DateTime @default(now())
+}
+
+model Aquaculture_sortOptions {
+  id   String @id @default(uuid())
+  name String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Aquaculture_categories {
+  id      String @id @default(uuid())
+  name    String @unique
+  img_url String
+  lang    String
+  aquaculture_products Aquaculture_product[] @relation("Aquaculture_categoriesToProducts")
+  createdAt DateTime @default(now())
+
+  @@map("aquaculture_categories")
+}
+
+model Aquaculture_show_product_btn_text {
+  id   String @id @default(uuid())
+  text String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Aquaculture_product {
+  id            String @id @default(uuid())
+  name          String @unique
+  description   String
+  img_url       String
+  lang          String
+  category_name String
+  category Aquaculture_categories @relation("Aquaculture_categoriesToProducts", fields: [category_name], references: [name])
+  contents Aquaculture_content[]  @relation("ProductContents")
+  createdAt DateTime @default(now())
+
+  @@map("aquaculture_products")
+}
+
+model Aquaculture_content {
+  id                       String  @id @default(uuid())
+  lang                     String
+  sub_title                String
+  sub_title1               String
+  sub_title2               String
+  thumbnail                String
+  img_url                  String
+  title                    String
+  description              String
+  type_title               String
+  type_text                String
+  size_title               String?
+  size_text                String?
+  components_title         String
+  components_text          String
+  vitamin_title            String
+  vitamin_text             String
+  shelf_life_title         String
+  shelf_life_text          String
+  storage_conditions_title String
+  storage_conditions_text  String
+  btn_text                 String
+  characteristics_title    String  @default("Default Title")
+  aquaculture_name String
+  aquaculture      Aquaculture_product @relation("ProductContents", fields: [aquaculture_name], references: [name])
+  characteristics Characteristic[]
+  createdAt DateTime @default(now())
+
+  @@map("aquaculture_content")
+}
+
+model Characteristic {
+  id                   Int                 @id @default(autoincrement())
+  title                String
+  percent              String
+  aquacultureContentId String
+  aquacultureContent   Aquaculture_content @relation(fields: [aquacultureContentId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Farmanimals_intro {
+  id         String @id @default(uuid())
+  title      String
+  sub_title  String
+  route      String
+  sub_title1 String
+  video_src  String
+  lang       String
+  createdAt DateTime @default(now())
+}
+
+model Farmanimals_product {
+  id            String @id @default(uuid())
+  name          String @unique
+  description   String
+  img_url       String
+  lang          String
+  category_name String
+  category Farmanimals_category  @relation("Farmanimals_categoriesToProducts", fields: [category_name], references: [name])
+  contents Farmanimals_content[] @relation("ProductToContent")
+  createdAt DateTime @default(now())
+
+  @@map("farmanimals_products")
+}
+
+model Farmanimals_content {
+  id                            String @id @default(uuid())
+  lang                          String
+  sub_title                     String
+  sub_title1                    String
+  sub_title2                    String
+  thumbnail                     String
+  img_url                       String
+  title                         String
+  description                   String
+  type_title                    String
+  type_text                     String
+  components_title              String
+  components_text               String
+  vitamin_title                 String
+  vitamin_text                  String
+  shelf_life_title              String
+  shelf_life_text               String
+  storage_conditions_title      String
+  storage_conditions_text       String
+  characteristics_title         String
+  feeding_recommendations_title String
+  feeding_recommendations_text  String
+  btn_text                      String
+  farmanimals_name String
+  farmAnimal       Farmanimals_product @relation("ProductToContent", fields: [farmanimals_name], references: [name])
+  characteristics Characteristics[]
+  createdAt DateTime @default(now())
+
+  @@map("farmanimals_content")
+}
+
+model Characteristics {
+  id          String @id @default(uuid())
+  title       String
+  percent     String
+  farmAnimalId String
+  farmAnimal   Farmanimals_content @relation(fields: [farmAnimalId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Farmanimals_category {
+  id      String @id @default(uuid())
+  name    String @unique
+  img_url String
+  lang    String
+  farmanimals_products Farmanimals_product[] @relation("Farmanimals_categoriesToProducts")
+  createdAt DateTime @default(now())
+
+  @@map("farmanimals_categories")
+}
+
+model Farmanimals_sortOption {
+  id   String @id @default(uuid())
+  name String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Farmanimals_show_product_btn_text {
+  id   String @id @default(uuid())
+  text String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Pets_intro {
+  id         String @id @default(uuid())
+  title      String
+  sub_title  String
+  route      String
+  sub_title1 String
+  video_src  String
+  lang       String
+  createdAt DateTime @default(now())
+}
+
+model Pets_sortOption {
+  id   String @id @default(uuid())
+  name String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Aboutcompany_intro {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  sub_title   String
+  route       String
+  sub_title1  String
+  img_url     String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Aboutcompany_info {
+  id          String @id @default(uuid())
+  btn_text    String
+  title       String
+  description String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Aboutcompany_heading {
+  id    String @id @default(uuid())
+  title String
+  lang  String
+  createdAt DateTime @default(now())
+}
+
+model Aboutcompany_data {
+  id          String @id @default(uuid())
+  img_url     String
+  sub_title   String
+  description String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Aboutcompany_partners {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  btn_text    String
+  img_url     String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Aboutcompany_vacancies_heading {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  url_text    String
+  url_link    String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Aboutcompany_feedback {
+  id                   String @id @default(uuid())
+  title                String
+  description          String
+  checkbox_text        String
+  btn_text             String
+  placeholder_name     String
+  placeholder_phone    String
+  placeholder_email    String
+  placeholder_question String
+  lang                 String
+  createdAt            DateTime @default(now())
+}
+
+model Aboutcompany_btn {
+  id       String @id @default(uuid())
+  btn_text String
+  lang     String
+  createdAt DateTime @default(now())
+}
+
+model Aboutcompany_vacancy {
+  id        String     @id @default(uuid())
+  category  String
+  lang      String
+  positions Position[]
+  createdAt DateTime @default(now())
+}
+
+model Position {
+  id                    String               @id @default(uuid())
+  title                 String
+  location              String
+  description           String
+  url_text              String
+  url_link              String
+  aboutCompanyVacancyId String
+  aboutCompanyVacancy   Aboutcompany_vacancy @relation(fields: [aboutCompanyVacancyId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Procurement_intro {
+  id         String @id @default(uuid())
+  title      String
+  sub_title  String
+  route      String
+  sub_title1 String
+  img_url    String
+  lang       String
+  createdAt  DateTime @default(now())
+}
+
+model Procurement_aboutcompany {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  btn_text    String
+  route       String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+
+model Procurement_advantage {
+  id         String      @id @default(uuid())
+  title      String
+  lang       String
+  advantages Advantage[]
+  createdAt  DateTime @default(now())
+}
+
+model Advantage {
+  id                     String                @id @default(uuid())
+  number                 String
+  description            String
+  procurementAdvantageId String
+  procurementAdvantage   Procurement_advantage @relation(fields: [procurementAdvantageId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Procurement_supplier {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  lang        String
+  products    Product[]
+  createdAt   DateTime @default(now())
+}
+
+model Product {
+  id                    String               @id @default(uuid())
+  name                  String
+  procurementSupplierId String
+  procurementSupplier   Procurement_supplier @relation(fields: [procurementSupplierId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Procurement_feedback {
+  id                   String @id @default(uuid())
+  title                String
+  description          String
+  checkbox_text        String
+  btn_text             String
+  placeholder_name     String
+  placeholder_phone    String
+  placeholder_email    String
+  placeholder_question String
+  lang                 String
+  createdAt            DateTime @default(now())
+}
+
+model News_info {
+  id         String @id @default(uuid())
+  img_url    String
+  data       String
+  title      String
+  link_about String
+  categories String
+  lang       String
+  contents News_content[]
+  createdAt DateTime @default(now())
+
+  @@map("news_info")
+}
+
+model News_content {
+  id           String  @id @default(uuid())
+  sub_title    String
+  sub_title1   String
+  sub_title2   String
+  title        String
+  data         String
+  name         String
+  name1        String?
+  name2        String?
+  name3        String?
+  img_url      String
+  img1_url     String?
+  img2_url     String?
+  img3_url     String?
+  img4_url     String?
+  img5_url     String?
+  img6_url     String?
+  img7_url     String?
+  img8_url     String?
+  img11_url    String?
+  video_src    String?
+  description  String?
+  description1 String?
+  description2 String?
+  description3 String?
+  url_text     String?
+  url_link     String?
+  url_text1    String?
+  url_link1    String?
+  url_text2    String?
+  url_link2    String?
+  info_title   String
+  news_title   String?
+  lang         String
+  newsInfo       News_info?       @relation(fields: [newsInfoId], references: [id])
+  newsInfoId     String?
+  homepageNews   Homepage_news?   @relation(fields: [homepageNewsId], references: [id])
+  homepageNewsId String?          
+  createdAt      DateTime @default(now())
+
+  @@map("news_content")
+}
+
+model News_heading {
+  id         String @id @default(uuid())
+  sub_title  String
+  sub_title1 String
+  route      String
+  lang       String
+  createdAt  DateTime @default(now())
+}
+
+model News_categories {
+  id   String @id @default(uuid())
+  name String
+  lang String
+  createdAt DateTime @default(now())
+}
+
+model Contacts_feedback {
+  id                   String @id @default(uuid())
+  sub_title            String
+  sub_title1           String
+  route                String
+  title                String
+  description          String
+  checkbox_text        String
+  btn_text             String
+  placeholder_name     String
+  placeholder_phone    String
+  placeholder_email    String
+  placeholder_question String
+  lang                 String
+  createdAt            DateTime @default(now())
+}
+
+model Contact_address {
+  id            String @id @default(uuid())
+  lang          String
+  title         String
+  address       String
+  phone_title   String
+  phone_number  String
+  email_title   String
+  email_address String
+  createdAt     DateTime @default(now())
+}
+
+model Contact_hours {
+  id    String @id @default(uuid())
+  lang  String
+  title String
+  days  Days[]
+  createdAt DateTime @default(now())
+}
+
+model Days {
+  id             String        @id @default(uuid())
+  day            String
+  time           String
+  contactHoursId String
+  contactHours   Contact_hours @relation(fields: [contactHoursId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Contact_links {
+  id    String  @id @default(uuid())
+  lang  String
+  title String
+  links Links[]
+  createdAt DateTime @default(now())
+}
+
+model Links {
+  id             String        @id @default(uuid())
+  platform       String
+  img_url        String
+  url_links      String
+  contactLinksId String
+  contact_links  Contact_links @relation(fields: [contactLinksId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Questions_and_answers {
+  id          String @id @default(uuid())
+  sub_title   String
+  route       String
+  sub_title1  String
+  title       String
+  description String
+  lang        String
+  createdAt   DateTime @default(now())
+}
+

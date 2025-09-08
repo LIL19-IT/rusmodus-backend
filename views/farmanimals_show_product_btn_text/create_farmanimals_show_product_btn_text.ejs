@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/farmanimals_show_product_btn_text/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Language code (e.g. en, ru)"
+      value="<%= btn_text?.lang || '' %>">
+    <input type="text" name="text" class="form-input" placeholder="Button Text" value="<%= btn_text?.text || '' %>">
+
+
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

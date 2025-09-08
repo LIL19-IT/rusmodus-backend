@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/procurement_aboutcompany/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Enter language code (e.g., en, fr)">
+    <input type="text" name="title" class="form-input" placeholder="Enter title">
+    <input type="text" name="description" class="form-input" placeholder="Enter description">
+    <input type="text" name="btn_text" class="form-input" placeholder="Enter button text">
+    <input type="text" name="route" class="form-input" placeholder="Enter route">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+      <p class="error-messages"><%= error %></p>
+  <% } %>
+
+</div>

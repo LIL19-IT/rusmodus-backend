@@ -1,0 +1,18 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/contacts_address/edit/<%= item.id %>" class="form-container">
+    <input type="text" name="title" class="form-input" placeholder="Title" value="<%= item.title %>">
+    <input type="text" name="address" class="form-input" placeholder="Address" value="<%= item.address %>">
+    <input type="text" name="phone_title" class="form-input" placeholder="Phone Title" value="<%= item.phone_title %>">
+    <input type="text" name="phone_number" class="form-input" placeholder="Phone Number" value="<%= item.phone_number %>">
+    <input type="text" name="email_title" class="form-input" placeholder="Email Title" value="<%= item.email_title %>">
+    <input type="email" name="email_address" class="form-input" placeholder="Email Address" value="<%= item.email_address %>">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message"><%= error %></p>
+  <% } %>
+</div>

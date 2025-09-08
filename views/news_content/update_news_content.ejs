@@ -1,0 +1,77 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/news_content/edit/<%= newsItem.id %>" class="form-container">
+
+    <input type="text" name="title" value="<%= newsItem.title %>" class="form-input" placeholder="Enter title" required>
+    <input type="text" name="sub_title" value="<%= newsItem.sub_title %>" class="form-input" placeholder="Enter sub title" required>
+    <input type="text" name="sub_title1" value="<%= newsItem.sub_title1 %>" class="form-input" placeholder="Enter second sub title" required>
+    <input type="text" name="sub_title2" value="<%= newsItem.sub_title2 %>" class="form-input" placeholder="Enter third sub title" required>
+    <input type="text" name="data" value="<%= newsItem.data %>" class="form-input" placeholder="Enter date" required>
+    <input type="text" name="name" value="<%= newsItem.name %>" class="form-input" placeholder="Enter name" required>
+
+    <div class="input-with-button">
+      <input type="text" name="img_url" id="editSelectedMediaInput" value="<%= newsItem.img_url %>" class="form-input" placeholder="Enter main image URL" required>
+      <button type="button" class="small-button openMediaModal" data-target="editSelectedMediaInput">Choose</button>
+    </div>
+
+    <input type="text" name="info_title" value="<%= newsItem.info_title %>" class="form-input" placeholder="Enter info title" required>
+    <input type="text" name="lang" value="<%= newsItem.lang %>" class="form-input" placeholder="Enter language code (e.g., en, fr)" required>
+
+    <input type="text" name="name1" value="<%= newsItem.name1 || '' %>" class="form-input" placeholder="Enter name 1">
+    <input type="text" name="name2" value="<%= newsItem.name2 || '' %>" class="form-input" placeholder="Enter name 2">
+    <input type="text" name="name3" value="<%= newsItem.name3 || '' %>" class="form-input" placeholder="Enter name 3">
+
+    <% for (let i = 1; i <= 8; i++) { %>
+      <div class="input-with-button">
+        <input type="text" name="img<%= i %>_url" id="editSelectedMediaInput<%= i %>" value="<%= newsItem['img' + i + '_url'] || '' %>" class="form-input" placeholder="Enter Image <%= i %> URL">
+        <button type="button" class="small-button openMediaModal" data-target="editSelectedMediaInput<%= i %>">Choose</button>
+      </div>
+    <% } %>
+
+    <div class="input-with-button">
+      <input type="text" name="img11_url" id="editSelectedMediaInput11" value="<%= newsItem.img11_url || '' %>" class="form-input" placeholder="Enter Image 11 URL">
+      <button type="button" class="small-button openMediaModal" data-target="editSelectedMediaInput11">Choose</button>
+    </div>
+
+    <div class="input-with-button">
+      <input type="text" name="video_src" id="editVideoSrc" value="<%= newsItem.video_src || '' %>" class="form-input" placeholder="Enter video source">
+      <button type="button" class="small-button openMediaModal" data-target="editVideoSrc">Choose</button>
+    </div>
+
+    <input type="text" name="description" value="<%= newsItem.description || '' %>" class="form-input" placeholder="Enter description">
+    <input type="text" name="description1" value="<%= newsItem.description1 || '' %>" class="form-input" placeholder="Enter description 1">
+    <input type="text" name="description2" value="<%= newsItem.description2 || '' %>" class="form-input" placeholder="Enter description 2">
+    <input type="text" name="description3" value="<%= newsItem.description3 || '' %>" class="form-input" placeholder="Enter description 3">
+
+    <input type="text" name="url_text" value="<%= newsItem.url_text || '' %>" class="form-input" placeholder="Enter URL text">
+    <input type="text" name="url_link" value="<%= newsItem.url_link || '' %>" class="form-input" placeholder="Enter URL link">
+    <input type="text" name="url_text1" value="<%= newsItem.url_text1 || '' %>" class="form-input" placeholder="Enter URL text 1">
+    <input type="text" name="url_link1" value="<%= newsItem.url_link1 || '' %>" class="form-input" placeholder="Enter URL link 1">
+    <input type="text" name="url_text2" value="<%= newsItem.url_text2 || '' %>" class="form-input" placeholder="Enter URL text 2">
+    <input type="text" name="url_link2" value="<%= newsItem.url_link2 || '' %>" class="form-input" placeholder="Enter URL link 2">
+
+    <input type="text" name="news_title" value="<%= newsItem.news_title || '' %>" class="form-input" placeholder="Enter news title">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message"><%= error %></p>
+  <% } %>
+</div>
+
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Select Media</h2>
+    <div class="image-grid" id="imageGrid">
+      <div id="imagesContainer">
+        <h3>Images</h3>
+      </div>
+      <div id="videosContainer">
+        <h3>Videos</h3>
+      </div>
+    </div>
+  </div>
+</div>

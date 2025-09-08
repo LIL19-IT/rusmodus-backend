@@ -1,0 +1,17 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/aboutcompany_btn/edit/<%= btn.id %>" class="form-container">
+    <input type="text" name="btn_text" value="<%= btn.btn_text %>" class="form-input" placeholder="Enter button text">
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+  <% } %>
+</div>

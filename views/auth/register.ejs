@@ -1,0 +1,28 @@
+<div class="register_page">
+
+  <h2 class="main-text">
+    <%= title %>
+  </h2>
+
+  <div class="bottom_side">
+    <form action="/auth/register" method="post" class="register-form">
+
+      <div class="input-group">
+        <input type="text" id="reg-username" name="username" placeholder="Enter your username" required class="input" />
+        <label htmlFor="reg-username">Enter your username</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="reg-password" name="password" placeholder=" " required minLength={5} class="input" />
+        <label htmlFor="reg-password">Enter your password</label>
+      </div>
+
+      <button type="submit" class="btn-submit">Register</button>
+    </form>
+  </div>
+
+</div>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>

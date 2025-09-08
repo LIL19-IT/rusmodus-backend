@@ -1,0 +1,18 @@
+<div class="page-wrapper">
+ <h2 class="title">
+    <%= title %>
+  </h2>
+
+<form method="post" action="/admin/homepage_products_heading/edit/<%= heading.id %>" class="form-container">
+    <input type="text" name="title" class="form-input" value="<%= heading.title %>" placeholder="Enter title">
+    <textarea name="description" class="form-input" placeholder="Enter description" rows="4"><%= heading.description %></textarea>
+    <button type="submit" class="form-button">Update</button>
+</form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>
+

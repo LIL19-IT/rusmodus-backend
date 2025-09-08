@@ -1,0 +1,23 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+
+  <form method="post" action="/admin/products/create" class="form-container">
+
+    <select name="procurementSupplierId" class="form-input" required>
+      <option value="">Select Supplier</option>
+      <% suppliers.forEach(supplier => { %>
+        <option value="<%= supplier.id %>" <%= supplier.id === product.procurementSupplierId ? 'selected' : '' %>>
+          <%= supplier.title %> 
+        </option>
+      <% }) %>
+    </select>
+
+    <input type="text" name="name" class="form-input" placeholder="Enter Product Name" value="<%= product.name || '' %>" required>
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+</div>

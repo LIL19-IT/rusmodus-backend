@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+ <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/contact/create" class="form-container">
+    <input type="text" name="lang" id="lang" class="form-input" placeholder="Enter language code">
+    <input type="text" name="phone" id="phone" class="form-input" placeholder="Enter phone number">
+    <input type="text" name="callRequestLabel" id="callRequestLabel" class="form-input" placeholder="Enter label">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

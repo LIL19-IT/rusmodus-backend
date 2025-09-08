@@ -1,0 +1,86 @@
+<div class="row">
+  <h2 class="page-title">
+    <%= title %>
+  </h2>
+
+  <div class="btn-wrapper">
+    <a href="/admin/contacts_feedback/create" class="btn-create">Create New <%= title %></a>
+  </div>
+  <div class="table-scroll-wrapper">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>N</th>
+          <th>Lang</th>
+          <th>Sub Title</th>
+          <th>Sub Title 1</th>
+          <th>Route</th>
+          <th>Title</th>
+          <th>Desc</th>
+          <th>Checkbox</th>
+          <th>Button</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Question</th>
+
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% feedbacks.forEach((elem, index)=> { %>
+          <tr>
+            <td>
+              <%= index + 1 %>
+            </td>
+            <td>
+              <%= elem.lang %>
+            </td>
+            <td>
+              <%= elem.sub_title %>
+            </td>
+            <td>
+              <%= elem.sub_title1 %>
+            </td>
+            <td>
+              <%= elem.route %>
+            </td>
+            <td>
+              <%= elem.title %>
+            </td>
+            <td>
+              <%= elem.description %>
+            </td>
+            <td>
+              <%= elem.checkbox_text %>
+            </td>
+            <td>
+              <%= elem.btn_text %>
+            </td>
+            <td>
+              <%= elem.placeholder_name %>
+            </td>
+            <td>
+              <%= elem.placeholder_phone %>
+            </td>
+            <td>
+              <%= elem.placeholder_email %>
+            </td>
+            <td>
+              <%= elem.placeholder_question %>
+            </td>
+            <td>
+              <button class="btn btn-edit"
+                onclick="location.href='/admin/contacts_feedback/edit/<%= elem.id %>'">Edit</button>
+              <form action="/admin/contacts_feedback/remove/<%= elem.id %>" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-remove"
+                  onclick="return confirm('Are you sure you want to delete this item?')">Remove</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

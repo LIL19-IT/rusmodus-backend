@@ -1,0 +1,39 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/contacts_feedback/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Enter language code (e.g., en, fr)"
+      value="<%= item?.lang || '' %>">
+    <input type="text" name="sub_title" class="form-input" placeholder="Enter subtitle"
+      value="<%= item?.sub_title || '' %>">
+    <input type="text" name="sub_title1" class="form-input" placeholder="Enter second subtitle"
+      value="<%= item?.sub_title1 || '' %>">
+    <input type="text" name="route" class="form-input" placeholder="Enter route" value="<%= item?.route || '' %>">
+    <input type="text" name="title" class="form-input" placeholder="Enter title" value="<%= item?.title || '' %>">
+    <input type="text" name="description" class="form-input" placeholder="Enter description"
+      value="<%= item?.description || '' %>">
+    <input type="text" name="checkbox_text" class="form-input" placeholder="Enter checkbox text"
+      value="<%= item?.checkbox_text || '' %>">
+    <input type="text" name="btn_text" class="form-input" placeholder="Enter button text"
+      value="<%= item?.btn_text || '' %>">
+    <input type="text" name="placeholder_name" class="form-input" placeholder="Enter name placeholder"
+      value="<%= item?.placeholder_name || '' %>">
+    <input type="text" name="placeholder_phone" class="form-input" placeholder="Enter phone placeholder"
+      value="<%= item?.placeholder_phone || '' %>">
+    <input type="text" name="placeholder_email" class="form-input" placeholder="Enter email placeholder"
+      value="<%= item?.placeholder_email || '' %>">
+    <input type="text" name="placeholder_question" class="form-input" placeholder="Enter question placeholder"
+      value="<%= item?.placeholder_question || '' %>">
+
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

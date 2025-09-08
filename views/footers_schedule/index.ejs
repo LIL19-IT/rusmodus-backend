@@ -1,0 +1,33 @@
+<div class="row">
+  <h2 class="page-title"><%= title %></h2>
+
+  <div class="btn-wrapper">
+    <a href="/admin/footers_schedule/create" class="btn-create">Create New <%= title %></a>
+  </div>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>N</th>
+        <th>Lang</th>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% schedules.forEach((schedule, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= schedule.lang %></td>
+          <td><%= schedule.title %></td>
+          <td>
+            <button class="btn btn-edit" onclick="location.href='/admin/footers_schedule/edit/<%= schedule.id %>'">Details</button>
+            <form action="/admin/footers_schedule/remove/<%= schedule.id %>" method="POST" style="display:inline;">
+              <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-remove">Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

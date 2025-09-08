@@ -1,0 +1,18 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/news_heading/create" class="form-container">
+    <input type="text" name="lang" class="form-input" placeholder="Enter language code (e.g., en, fr)">
+    <input type="text" name="sub_title" class="form-input" placeholder="Enter subtitle">
+    <input type="text" name="sub_title1" class="form-input" placeholder="Enter second subtitle">
+    <input type="text" name="route" class="form-input" placeholder="Enter route">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+      <p class="error-messages"><%= error %></p>
+  <% } %>
+
+</div>

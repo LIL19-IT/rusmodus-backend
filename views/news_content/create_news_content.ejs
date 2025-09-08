@@ -1,0 +1,105 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/news_content/create" class="form-container">
+
+    <input type="text" name="title" class="form-input" placeholder="Enter Title" required>
+    <input type="text" name="sub_title" class="form-input" placeholder="Enter Subtitle" required>
+    <input type="text" name="sub_title1" class="form-input" placeholder="Enter Subtitle 1" required>
+    <input type="text" name="sub_title2" class="form-input" placeholder="Enter Subtitle 2" required>
+    <input type="text" name="data" class="form-input" placeholder="Enter Date" required>
+    <input type="text" name="name" class="form-input" placeholder="Enter Name" required>
+
+    <div class="input-with-button">
+      <input type="text" name="img_url" id="selectedMediaInput" class="form-input" placeholder="Enter Image URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput">Choose</button>
+    </div>
+
+    <input type="text" name="info_title" class="form-input" placeholder="Enter Info Title" required>
+    <input type="text" name="lang" class="form-input" placeholder="Enter Language Code (e.g., en, fr)" required>
+
+    <input type="text" name="name1" class="form-input" placeholder="Enter Name 1">
+    <input type="text" name="name2" class="form-input" placeholder="Enter Name 2">
+    <input type="text" name="name3" class="form-input" placeholder="Enter Name 3">
+
+    <div class="input-with-button">
+      <input type="text" name="img1_url" id="selectedMediaInput1" class="form-input" placeholder="Enter Image 1 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput1">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img2_url" id="selectedMediaInput2" class="form-input" placeholder="Enter Image 2 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput2">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img3_url" id="selectedMediaInput3" class="form-input" placeholder="Enter Image 3 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput3">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img4_url" id="selectedMediaInput4" class="form-input" placeholder="Enter Image 4 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput4">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img5_url" id="selectedMediaInput5" class="form-input" placeholder="Enter Image 5 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput5">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img6_url" id="selectedMediaInput6" class="form-input" placeholder="Enter Image 6 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput6">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img7_url" id="selectedMediaInput7" class="form-input" placeholder="Enter Image 7 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput7">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img8_url" id="selectedMediaInput8" class="form-input" placeholder="Enter Image 8 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput8">Choose</button>
+    </div>
+    <div class="input-with-button">
+      <input type="text" name="img11_url" id="selectedMediaInput11" class="form-input" placeholder="Enter Image 11 URL">
+      <button type="button" class="small-button openMediaModal" data-target="selectedMediaInput11">Choose</button>
+    </div>
+
+    <div class="input-with-button">
+      <input type="text" name="video_src" id="video_src" class="form-input" placeholder="Enter Video URL">
+      <button type="button" class="small-button openMediaModal" data-target="video_src">Choose</button>
+    </div>
+
+    <input type="text" name="description" class="form-input" placeholder="Enter Description">
+    <input type="text" name="description1" class="form-input" placeholder="Enter Description 1">
+    <input type="text" name="description2" class="form-input" placeholder="Enter Description 2">
+    <input type="text" name="description3" class="form-input" placeholder="Enter Description 3">
+
+    <input type="text" name="url_text" class="form-input" placeholder="Enter URL Text">
+    <input type="text" name="url_link" class="form-input" placeholder="Enter URL Link">
+    <input type="text" name="url_text1" class="form-input" placeholder="Enter URL Text 1">
+    <input type="text" name="url_link1" class="form-input" placeholder="Enter URL Link 1">
+    <input type="text" name="url_text2" class="form-input" placeholder="Enter URL Text 2">
+    <input type="text" name="url_link2" class="form-input" placeholder="Enter URL Link 2">
+
+    <input type="text" name="news_title" class="form-input" placeholder="Enter News Title">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+
+</div>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Select Media</h2>
+      <div class="image-grid" id="imageGrid">
+        <div id="imagesContainer">
+          <h3>Images</h3>
+        </div>
+        <div id="videosContainer">
+          <h3>Videos</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

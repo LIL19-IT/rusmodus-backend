@@ -1,0 +1,45 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/homepage-about/create" class="form-container">
+    <input type="text" name="lang" id="lang" class="form-input" placeholder="Enter language code" value="<%= lang || '' %>">
+
+    <div class="input-with-button">
+      <input type="text" name="img1_url" id="selectedImageInput1" class="form-input" placeholder="Enter first image URL" value="<%= img1_url || '' %>">
+      <button type="button" class="small-button openMediaModal" data-target="selectedImageInput1">Choose</button>
+    </div>
+
+    <div class="input-with-button">
+      <input type="text" name="img2_url" id="selectedImageInput2" class="form-input" placeholder="Enter second image URL" value="<%= img2_url || '' %>">
+      <button type="button" class="small-button openMediaModal" data-target="selectedImageInput2">Choose</button>
+    </div>
+
+    <input type="text" name="title" id="title" class="form-input" placeholder="Enter title" value="<%= titleValue || '' %>">
+    <input type="text" name="sub_title" id="sub_title" class="form-input" placeholder="Enter subtitle" value="<%= sub_title || '' %>">
+    <textarea name="description1" id="description1" class="form-input" placeholder="Enter first description"><%= description1 || '' %></textarea>
+    <textarea name="description2" id="description2" class="form-input" placeholder="Enter second description"><%= description2 || '' %></textarea>
+    <input type="text" name="btn_text" id="btn_text" class="form-input" placeholder="Enter button text" value="<%= btn_text || '' %>">
+    <input type="text" name="route" id="route" class="form-input" placeholder="Enter route" value="<%= route || '' %>">
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Select Media</h2>
+      <div class="image-grid" id="imageGrid">
+        <div id="imagesContainer">
+          <h3>Images</h3>
+        </div>
+        <div id="videosContainer">
+          <h3>Videos</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

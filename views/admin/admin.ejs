@@ -1,0 +1,33 @@
+<div class="main_list">
+  <div class="list">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <a href="/admin/header" class="dropbtn">Header Content</a>
+    <a href="/admin/homepage" class="dropbtn">HomePage</a>
+    <a href="/admin/aquaculture" class="dropbtn">Aquaculture</a>
+    <a href="/admin/farmanimals" class="dropbtn">Farmanimals</a>
+    <a href="/admin/pets" class="dropbtn">Pets</a>
+    <a href="/admin/aboutcompany" class="dropbtn">AboutCompany</a>
+    <a href="/admin/procurement" class="dropbtn">Procurement</a>
+    <a href="/admin/news" class="dropbtn">News</a>
+    <a href="/admin/contacts" class="dropbtn">Contacts</a>
+    <a href="/admin/questions" class="dropbtn">Q&A</a>
+    <a href="/admin/footers" class="dropbtn">Footer</a>
+    <a href="/admin/images" class="dropbtn">Media</a>
+  </div>
+</div>
+
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const links = document.querySelectorAll('.list a');
+
+
+  searchInput.addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+
+    links.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      link.style.display = text.includes(query) ? 'block' : 'none';
+    });
+  });
+</script>

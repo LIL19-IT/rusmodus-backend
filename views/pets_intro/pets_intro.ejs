@@ -1,0 +1,63 @@
+<div class="row">
+    <h2 class="page-title">
+        <%= title %>
+    </h2>
+
+    <div class="btn-wrapper">
+        <a href="/admin/pets_intro/create" class="btn-create">Create New <%= title %></a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Video</th>
+                <th>Lang</th>
+                <th>Title</th>
+                <th>Sub Title</th>
+                <th>Sub Title 1</th>
+                <th>Route</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% intros.forEach((elem, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <video src="<%= elem.video_src %>" controls muted></video>
+                    </td>
+                    <td>
+                        <%= elem.lang %>
+                    </td>
+                    <td>
+                        <%= elem.title %>
+                    </td>
+                    <td>
+                        <%= elem.sub_title %>
+                    </td>
+                    <td>
+                        <%= elem.sub_title1 %>
+                    </td>
+                     <td>
+                        <%= elem.route %>
+                    </td>
+                    <td>
+                        <button class="btn btn-edit"
+                            onclick="location.href='/admin/pets_intro/edit/<%= elem.id %>'">Edit</button>
+
+                        <form action="/admin/pets_intro/remove/<%= elem.id %>" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')"
+                                class="btn btn-remove">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>

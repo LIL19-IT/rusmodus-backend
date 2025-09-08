@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+<form method="post" action="/admin/homepage_feedback/create" class="form-container">
+   <input type="text" name="lang" class="form-input" placeholder="e.g., en, fr">
+    <input type="text" name="title" class="form-input" placeholder="Enter title">
+    <textarea name="description" class="form-input" rows="3" placeholder="Enter description"></textarea>
+    <input type="text" name="checkbox_text" class="form-input" placeholder="e.g., I agree to the terms">
+    <input type="text" name="btn_text" class="form-input" placeholder="e.g., Submit">
+    <input type="text" name="placeholder_name" class="form-input" placeholder="e.g., Your name">
+    <input type="text" name="placeholder_phone" class="form-input" placeholder="e.g., Your phone">
+    <input type="text" name="placeholder_email" class="form-input" placeholder="e.g., Your email">
+    <input type="text" name="placeholder_question" class="form-input" placeholder="e.g., Your question">
+
+    <button type="submit" class="form-button">Create</button>
+</form>
+
+  <% if (error) { %>
+      <p class="error-messages"><%= error %></p>
+  <% } %>
+</div>

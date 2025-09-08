@@ -1,0 +1,16 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/aboutcompany_btn/create" class="form-container">
+       <input type="text" name="lang" class="form-input" placeholder="Enter language code (e.g., en, ru)">
+    <input type="text" name="btn_text" class="form-input" placeholder="Enter button text">
+  
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+      <p class="error-messages"><%= error %></p>
+  <% } %>
+
+</div>

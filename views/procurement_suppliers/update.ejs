@@ -1,0 +1,94 @@
+<div class="rows">
+  <h2 class="page-title">Update Supplier</h2>
+
+  <form action="/admin/procurement_suppliers/update/<%= id %>" method="post">
+    <div class="actions">
+      <input type="submit" value="Save">
+      <a href="/admin/procurement_suppliers" class="back-btn">Back</a>
+    </div>
+
+    <div class="form-group">
+      <label>Lang:</label>
+      <input type="text" name="lang" value="<%= supplier.lang %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= supplier.title %>" />
+    </div>
+
+    <div class="form-group">
+      <label>Description:</label>
+      <input type="text" name="description" value="<%= supplier.description %>" />
+    </div>
+  </form>
+
+  <form action="/admin/procurement_suppliers/update-products/<%= id %>" method="post">
+
+    <h3>Products</h3>
+    <table id="productsTable" class="table" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (supplier.products || []).forEach((product, index) => { %>
+          <tr>
+            <td>
+              <input type="hidden" name="products[<%= index %>][id]" value="<%= product.id %>">
+              <input type="text" name="products[<%= index %>][name]" value="<%= product.name %>">
+            </td>
+            <td><button type="button" class="removeRowBtn">Remove</button></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="btn-group">
+      <button type="button" id="addProductBtn">+ Add Product</button>
+      <button type="submit">Save Products</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addProductBtn");
+  const tableBody = document.querySelector("#productsTable tbody");
+
+  function getNextIndex() {
+    const rows = tableBody.querySelectorAll("tr");
+    let maxIndex = -1;
+    rows.forEach(tr => {
+      const hiddenInput = tr.querySelector("input[type='hidden']");
+      if (hiddenInput) {
+        const name = hiddenInput.name;
+        const match = name.match(/\[(\d+)\]/);
+        if (match) {
+          const idx = parseInt(match[1]);
+          if (idx > maxIndex) maxIndex = idx;
+        }
+      }
+    });
+    return maxIndex + 1;
+  }
+
+  addBtn.addEventListener("click", () => {
+    const index = getNextIndex();
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <input type="hidden" name="products[${index}][id]" value="">
+        <input type="text" name="products[${index}][name]" value="">
+      </td>
+      <td><button type="button" class="removeRowBtn">Remove</button></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector(".removeRowBtn").addEventListener("click", () => newRow.remove());
+  });
+
+  document.querySelectorAll(".removeRowBtn").forEach(btn => {
+    btn.addEventListener("click", e => e.target.closest("tr").remove());
+  });
+</script>

@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+  <h2 class="title">
+    <%= title %>
+  </h2>
+
+  <form method="post" action="/admin/aquaculture_show_product_btn_text/edit/<%= btnText.id %>" class="form-container">
+
+    <input type="text" name="text" value="<%= btnText.text %>" class="form-input" placeholder="Enter button text">
+
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message">
+      <%= error %>
+    </p>
+    <% } %>
+</div>

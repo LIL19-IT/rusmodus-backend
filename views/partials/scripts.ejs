@@ -1,0 +1,171 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const sidebar = document.querySelector('.sidebar');
+
+    const pathMap = {};
+
+    document.querySelectorAll('.sidebar .dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        if (content && content.classList.contains('dropdown-container')) {
+
+          document.querySelectorAll('.sidebar .dropdown-container.open').forEach(dc => {
+            if (dc !== content) {
+              dc.classList.remove('open');
+              const btnClose = Array.from(document.querySelectorAll('.sidebar .dropdown-btn'))
+                .find(b => b.nextElementSibling === dc);
+              if (btnClose) {
+                const arr = btnClose.querySelector('.arrow');
+                if (arr) arr.style.transform = 'rotate(0deg)';
+              }
+            }
+          });
+
+          content.classList.toggle('open');
+          if (arrow) {
+            arrow.style.transform = content.classList.contains('open') ? 'rotate(90deg)' : 'rotate(0deg)';
+          }
+        }
+      });
+    });
+
+  
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      const href = link.getAttribute('href');
+      let shouldBeActive = false;
+
+
+      if (currentPath === href || currentPath.startsWith(href + '/')) {
+        shouldBeActive = true;
+      }
+
+      Object.keys(pathMap).forEach(parentPath => {
+        pathMap[parentPath].forEach(childPath => {
+          if (currentPath.startsWith(childPath)) {
+            if (href === parentPath) {
+              shouldBeActive = true;
+            }
+          }
+        });
+      });
+
+      if (shouldBeActive) {
+        link.classList.add('active');
+
+        const dropdownContainer = link.closest('.dropdown-container');
+        if (dropdownContainer) {
+          dropdownContainer.classList.add('open');
+
+          const dropdownBtn = Array.from(document.querySelectorAll('.sidebar .dropdown-btn'))
+            .find(btn => btn.nextElementSibling === dropdownContainer);
+
+          if (dropdownBtn) {
+            const arrow = dropdownBtn.querySelector('.arrow');
+            if (arrow) arrow.style.transform = 'rotate(90deg)';
+          }
+        }
+
+        const linkArrow = link.querySelector('.arrow');
+        if (linkArrow) {
+          linkArrow.style.transform = 'rotate(90deg)';
+        }
+      }
+    });
+  });
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById("imageModal");
+  const closeModalBtn = modal.querySelector(".close");
+  const imagesContainer = document.getElementById("imagesContainer");
+  const videosContainer = document.getElementById("videosContainer");
+  let currentInput = null;
+
+  document.querySelectorAll(".small-button").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const targetId = btn.getAttribute("data-target");
+      currentInput = document.getElementById(targetId); 
+      modal.style.display = "block";
+
+      imagesContainer.innerHTML = "<h3>Images</h3><p>Loading...</p>";
+      videosContainer.innerHTML = "<h3>Videos</h3><p>Loading...</p>";
+
+      try {
+        const res = await fetch("/admin/images/list");
+        const data = await res.json();
+
+        const images = data.images || [];
+        const videos = data.videos || [];
+
+        imagesContainer.innerHTML = "<h3>Images</h3>";
+        videosContainer.innerHTML = "<h3>Videos</h3>";
+
+        if (!images.length) imagesContainer.innerHTML += "<p>No images found.</p>";
+        if (!videos.length) videosContainer.innerHTML += "<p>No videos found.</p>";
+        
+        // Images
+        images.forEach(imgName => {
+          const img = document.createElement("img");
+          img.src = `/images/${imgName}`;
+          img.alt = imgName;
+          img.className = "media-img";
+          img.title = imgName;
+          img.addEventListener("click", () => {
+            // Update text input
+            currentInput.value = `/images/${imgName}`;
+            // Update preview image if exists
+            const previewId = currentInput.id.replace('Input', 'Preview');
+            const previewImage = document.getElementById(previewId);
+            if (previewImage) {
+              previewImage.src = `/images/${imgName}`;
+            }
+            modal.style.display = "none";
+          });
+          imagesContainer.appendChild(img);
+        });
+
+        // Videos
+        videos.forEach(videoName => {
+          const video = document.createElement("video");
+          video.src = `/videos/${videoName}`;
+          video.controls = true;
+          video.className = "media-video";
+          video.title = videoName;
+          video.addEventListener("click", () => {
+            currentInput.value = `/videos/${videoName}`;
+            const previewId = currentInput.id.replace('Input', 'Preview');
+            const previewImage = document.getElementById(previewId);
+            if (previewImage) {
+              previewImage.src = `/videos/${videoName}`; // եթե preview պետք է դարձնել video
+            }
+            modal.style.display = "none";
+          });
+          videosContainer.appendChild(video);
+        });
+
+      } catch (err) {
+        console.error(err);
+        imagesContainer.innerHTML = "<h3>Images</h3><p>Error loading images.</p>";
+        videosContainer.innerHTML = "<h3>Videos</h3><p>Error loading videos.</p>";
+      }
+    });
+  });
+
+  // Close modal
+  closeModalBtn.addEventListener("click", () => modal.style.display = "none");
+
+  // Close modal when clicking outside
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+});
+</script>
+
+
+
+

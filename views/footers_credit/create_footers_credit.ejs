@@ -1,0 +1,45 @@
+<div class="page-wrapper">
+
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/footers_credit/create" class="form-container">
+    <input 
+      type="text" 
+      name="lang" 
+      class="form-input" 
+      placeholder="Enter language code (e.g., en, fr)" 
+      value="<%= credit ? credit.lang : '' %>"
+    >
+
+    <input 
+      type="text" 
+      name="privacy_policy" 
+      class="form-input" 
+      placeholder="Enter Privacy Policy text" 
+      value="<%= credit ? credit.privacy_policy : '' %>"
+    >
+
+    <input 
+      type="text" 
+      name="legal_info" 
+      class="form-input" 
+      placeholder="Enter Legal Information text" 
+      value="<%= credit ? credit.legal_info : '' %>"
+    >
+
+    <input 
+      type="text" 
+      name="info" 
+      class="form-input" 
+      placeholder="Enter additional Info" 
+      value="<%= credit ? credit.info : '' %>"
+    >
+
+    <button type="submit" class="form-button">Create</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-messages"><%= error %></p>
+  <% } %>
+
+</div>

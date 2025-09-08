@@ -1,0 +1,30 @@
+<div class="page-wrapper">
+  <h2 class="title"><%= title %></h2>
+
+  <form method="post" action="/admin/pets_sortOption/edit/<%= sortOption.id %>" class="form-container">
+
+    <input 
+      type="text" 
+      name="name" 
+      value="<%= sortOption.name %>" 
+      class="form-input" 
+      placeholder="Enter sort option name"
+      required
+    >
+
+    <input 
+      type="text" 
+      name="lang" 
+      value="<%= sortOption.lang %>" 
+      class="form-input" 
+      placeholder="Enter language code (e.g., en, ru)"
+      required
+    >
+
+    <button type="submit" class="form-button">Update</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error-message"><%= error %></p>
+  <% } %>
+</div>
